@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economía Naranja en Colombia | Destinos Turísticos</title>
+    <style>
+        :root {
+            --color-primary: #FF8C00;
+            --color-secondary: #0077B6;
+            --color-accent: #FF6B6B;
+            --color-light: #F8F9FA;
+            --color-dark: #343A40;
+            --color-success: #28A745;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            padding-top: 80px; /* Para compensar el header fijo */
+        }
+        
+        /* Encabezado fijo */
+        .fixed-header {
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--color-accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+        
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: white;
+            transition: width 0.3s ease;
+        }
+        
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        
+        /* Hero section con imagen de fondo */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://boyacavisible.com/wp-content/uploads/2024/03/destinos-colombia.png') no-repeat center center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            color: white;
+            text-align: center;
+            position: relative;
+            margin-top: -80px; /* Compensa el padding del body */
+            padding-top: 80px; /* Asegura que el contenido no quede detrás del header */
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+        
+        .hero p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn:hover {
+            background: var(--color-secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.8rem;
+            color: var(--color-secondary);
+            margin-bottom: 1.2rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2:after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 4px;
+            background: var(--color-primary);
+            bottom: -12px;
+            left: 20%;
+            border-radius: 2px;
+        }
+        
+        .section-title p {
+            color: #666;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+        }
+        
+        .about-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            font-size: 1.1rem;
+        }
+        
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image img:hover {
+            transform: scale(1.05);
+        }
+        
+        .destinations {
+            background-color: var(--color-light);
+        }
+        
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .destination-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .destination-card:hover .card-image img {
+            transform: scale(1.1);
+        }
+        
+        .card-content {
+            padding: 1.8rem;
+            display: none;
+        }
+        
+        .card-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .card-content h3 {
+            color: var(--color-secondary);
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+        
+        .card-content p {
+            color: #666;
+            margin-bottom: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .card-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1.2rem;
+            color: #666;
+        }
+        
+        .card-content li {
+            margin-bottom: 0.5rem;
+        }
+        /* Nueva sección de video */
+        .video-section {
+            background-color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .video-container video {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .video-container:hover .video-overlay {
+            opacity: 1;
+        }
+        
+        .play-button {
+            width: 70px;
+            height: 70px;
+            background-color: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        
+        .play-button:hover {
+            transform: scale(1.1);
+            background-color: var(--color-secondary);
+        }
+        
+        .video-caption {
+            margin-top: 1.5rem;
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .impact {
+            background: linear-gradient(135deg, var(--color-secondary), var(--color-primary));
+            color: white;
+        }
+        
+        .impact .section-title h2 {
+            color: white;
+        }
+        
+        .impact .section-title p {
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2.5rem;
+            text-align: center;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-item p {
+            font-size: 1.2rem;
+        }
+        
+        .cta {
+            text-align: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            padding: 7rem 0;
+        }
+        
+        .cta .section-title h2 {
+            color: var(--color-secondary);
+        }
+        
+        .cta-form {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .cta-form input {
+            padding: 1rem 1.5rem;
+            width: 350px;
+            max-width: 100%;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .cta-form input:focus {
+            border-color: var(--color-primary);
+        }
+        
+        footer {
+            background: var(--color-dark);
+            color: white;
+            padding: 4rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 2.5rem;
+            margin-bottom: 2.5rem;
+        }
+        
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+        
+        .footer-section h3:after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background: var(--color-primary);
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 1.1rem;
+            display: inline-block;
+        }
+        
+        .footer-links a:hover {
+            color: var(--color-primary);
+            transform: translateX(5px);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--color-primary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 1.1rem;
+        }
+        
+        .image-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .fixed-header {
+                padding: 0.8rem 0;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            nav ul li {
+                margin: 0 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+            
+            .hero {
+                height: 60vh;
+                margin-top: -70px;
+                padding-top: 70px;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .cta-form {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-form input {
+                width: 100%;
+            }
+            .video-container {
+                max-width: 90%;
+            }
+            
+            .play-button {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .play-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .video-caption {
+                font-size: 1rem;
+            }
+        }
+        
+    </style>
+</head>
+<body>
+    <!-- Encabezado fijo -->
+    <header class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">Economía<span>Naranja</span></div>
+                <nav>
+                    <ul>
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#que-es">¿Qué es?</a></li>
+                        <li><a href="#destinos">Destinos</a></li>
+                        <li><a href="#impacto">Impacto</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero section con imagen de fondo -->
+    <section class="hero" id="inicio">
+        <div class="hero-content">
+            <h1>Economía Naranja en Colombia</h1>
+            <p>Descubre cómo la creatividad y la cultura se convierten en motores de desarrollo económico en los destinos turísticos más emblemáticos de Colombia.</p>
+            <a href="#destinos" class="btn">Explorar Destinos</a>
+        </div>
+    </section>
+
+    <section id="que-es">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Qué es la Economía Naranja?</h2>
+                <p>Conoce el concepto que está transformando la forma de entender el desarrollo económico a través de la creatividad y la cultura.</p>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>La economía naranja es un concepto que se refiere al conjunto de actividades que de manera encadenada permiten que las ideas se transformen en bienes y servicios culturales, cuyo valor está determinado por su contenido de propiedad intelectual.</p>
+                    <p>En Colombia, este modelo económico ha tomado especial relevancia, reconociendo el potencial de las industrias creativas y culturales como motores de desarrollo sostenible.</p>
+                    <p>El término "naranja" hace referencia al color que tradicionalmente se asocia con la cultura, la creatividad y la identidad.</p>
+                    <p>Este sector incluye áreas como: artes visuales y escénicas, patrimonio cultural, medios de comunicación, creaciones funcionales, diseño, software de contenido, educación artística y cultural, e investigación y desarrollo.</p>
+                </div>
+                <div class="about-image">
+                    <img src="imagenes\fondo_header.png" alt="Artesanía colombiana">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="destinations" id="destinos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Destinos Turísticos y Economía Naranja</h2>
+                <p>Haz clic en cada destino para descubrir cómo se desarrolla la economía naranja en los principales lugares turísticos de Colombia.</p>
+            </div>
+            <div class="destination-grid">
+                <!-- Destino 1 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\cartagena.jpg" alt="Cartagena de Indias">
+                    </div>
+                    <div class="card-content">
+                        <h3>Cartagena de Indias</h3>
+                        <p>La ciudad amurallada es epicentro de festivales culturales, artes escénicas y gastronomía de clase mundial que impulsan la economía creativa.</p>
+                        <p>La economía naranja en Cartagena se manifiesta a través de:</p>
+                        <ul>
+                            <li>Festivales internacionales de cine y música</li>
+                            <li>Artesanías locales y joyería</li>
+                            <li>Gastronomía fusión que rescata sabores tradicionales</li>
+                            <li>Performances culturales en el centro histórico</li>
+                        </ul>
+                        <p>El Festival Internacional de Cine de Cartagena es el evento más representativo de la economía naranja en la ciudad, generando empleo e ingresos para cineastas, productores y gestores culturales de toda la región.</p>
+                    </div>
+                </div>
+                
+                <!-- Destino 2 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\medellin.jpeg" alt="Medellín">
+                        <div class="image-note">Reemplaza con: medellin.jpg</div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Medellín</h3>
+                        <p>Conocida como la ciudad de la eterna primavera, Medellín es un hub de innovación, diseño y emprendimiento cultural.</p>
+                        <p>La economía naranja en Medellín se desarrolla mediante:</p>
+                        <ul>
+                            <li>Distritos de innovación y creatividad</li>
+                            <li>Industria de la moda y diseño textil</li>
+                            <li>Desarrollo de software y videojuegos</li>
+                            <li>Eventos culturales como la Feria de las Flores</li>
+                        </ul>
+                        <p>La Feria de las Flores es el evento más representativo de la economía naranja en Medellín, generando empleo e ingresos para silleteros, artesanos y gestores culturales de toda la región.</p>
+                    </div>
+                </div>
+                
+                <!-- Destino 3 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\bogota.png" alt="Bogotá">
+                    </div>
+                    <div class="card-content">
+                        <h3>Bogotá</h3>
+                        <p>La capital colombiana es el centro neurálgico de las industrias creativas del país, con una escena cultural diversa y vibrante.</p>
+                        <p>La economía naranja en Bogotá incluye:</p>
+                        <ul>
+                            <li>Museos y galerías de arte de talla internacional</li>
+                            <li>Industria editorial y literaria</li>
+                            <li>Producción audiovisual y cinematográfica</li>
+                            <li>Festivales de teatro y artes escénicas</li>
+                        </ul>
+                        <p>El Festival Iberoamericano de Teatro de Bogotá es el evento más representativo de la economía naranja en la capital, generando empleo e ingresos para artistas, compañías teatrales y gestores culturales de toda la región.</p>
+                    </div>
+                </div>
+                
+                <!-- Destino 4 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\amazonas.jpg" alt="amazonas">
+                    </div>
+                    <div class="card-content">
+                        <h3>Amazonas</h3>
+                        <p>El departamento del Amazonas es el pulmón del mundo y un territorio donde la economía naranja se entrelaza con la sabiduría ancestral de las comunidades indígenas.</p>
+                        <p>La economía naranja en el Amazonas se desarrolla a través de:</p>
+                        <ul>
+                            <li>Artesanías con materiales naturales como semillas, cortezas y fibras vegetales</li>
+                            <li>Turismo comunitario y experiencias vivenciales con comunidades indígenas</li>
+                            <li>Preservación y comercialización de conocimientos ancestrales medicinales</li>
+                            <li>Gastronomía autóctona basada en productos de la selva</li>
+                            <li>Ecoturismo y avistamiento de aves con guías locales especializados</li>
+                            <li>Producción de cosméticos naturales con ingredientes amazónicos</li>
+                        </ul>
+                        <p>Las comunidades indígenas como los Tikuna, Huitoto y Yagua han desarrollado modelos económicos sostenibles que valoran su patrimonio cultural y natural, creando una economía naranja única en el mundo.</p>
+                    </div>
+                </div>
+
+                <!-- Destino 5 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\Villavicencio.jpg" alt="Villavicencio">
+                    </div>
+                    <div class="card-content">
+                        <h3>Villavicencio</h3>
+                        <p>Villavicencio, conocida como la puerta al llano colombiano, es un centro de desarrollo de economía naranja donde convergen tradiciones llaneras con innovación cultural.</p>
+                        <p>La economía naranja en Villavicencio incluye:</p>
+                        <ul>
+                            <li>Música llanera y torneos de coleo como atractivos culturales</li>
+                            <li>Gastronomía llanera con platos típicos como la mamona y la ternera a la llanera</li>
+                            <li>Artesanías en cuero y productos derivados de la actividad ganadera</li>
+                            <li>Festivales y ferias equinas que promueven la cultura llanera</li>
+                            <li>Turismo agropecuario y experiencias en fincas ganaderas</li>
+                            <li>Centros culturales que promueven las tradiciones orales y musicales del llano</li>
+                        </ul>
+                        <p>Villavicencio se ha convertido en un hub de emprendimientos culturales que aprovechan las tradiciones llaneras para crear productos y experiencias únicas para visitantes nacionales e internacionales.</p>
+                    </div>
+                </div>
+
+                <!-- Destino 6 -->
+                <div class="destination-card">
+                    <div class="card-image">
+                        <img src="imagenes\nariño.jpg" alt="Nariño">
+                    </div>
+                    <div class="card-content">
+                        <h3>Nariño</h3>
+                        <p>Nariño, en el suroccidente de Colombia, es una región de gran diversidad cultural donde la economía naranja florece a través de sus expresiones artísticas, culturales y productivas.</p>
+                        <p>La economía naranja en Nariño se manifiesta en:</p>
+                        <ul>
+                            <li>Artesanías en madera, cuero y textiles con diseños tradicionales</li>
+                            <li>Festivales culturales como el Carnaval de Negros y Blancos (Patrimonio de la Humanidad)</li>
+                            <li>Gastronomía tradicional nariñense con platos como el cuy y el hornado</li>
+                            <li>Producción musical y danzas folclóricas afroandinas</li>
+                            <li>Turismo cultural en pueblos patrimoniales como Ipiales y Pasto</li>
+                            <li>Producción de café especial y productos agroecológicos con identidad cultural</li>
+                        </ul>
+                        <p>El Carnaval de Negros y Blancos es el evento más representativo de la economía naranja en Nariño, generando empleo e ingresos para artistas, artesanos y gestores culturales de la región.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+     <!-- Sección de video después de destinos turísticos -->
+    <section class="video-section" id="video">
+        <div class="container">
+            <div class="section-title">
+                <h2>La Economía Naranja en Acción</h2>
+                <p>Descubre cómo la creatividad y el talento colombiano están transformando la economía del país</p>
+            </div>
+            
+            <div class="video-container">
+                <video id="economiaVideo" controls poster="video-poster.jpg">
+                    <source src="videos\entrevista.mp4" type="video/mp4">
+                    <source src="videos/economia-naranja.webm" type="video/webm">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+                
+                <div class="video-overlay">
+                    <div class="play-button" id="playButton">▶</div>
+                </div>
+            </div>
+            
+            <div class="video-caption">
+                <p>Este video muestra cómo la economía naranja está transformando comunidades a través de la creatividad, el arte y la cultura en diferentes regiones de Colombia.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="impact" id="impacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>Impacto de la Economía Naranja</h2>
+                <p>Descubre cómo las industrias creativas están transformando la economía colombiana.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">6.1%</div>
+                    <p>del PIB nacional es generado por la economía naranja</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">600k+</div>
+                    <p>empleos directos creados por las industrias creativas</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12%</div>
+                    <p>crecimiento anual promedio del sector</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30%</div>
+                    <p>de las exportaciones culturales de Latinoamérica son colombianas</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contacto">
+        <div class="container">
+            <div class="section-title">
+                <h2>¿Te interesa conocer más?</h2>
+                <p>Suscríbete a nuestro newsletter para recibir información actualizada sobre economía naranja en Colombia.</p>
+            </div>
+            <div class="cta-form">
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <button type="submit" class="btn">Suscribirse</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Economía Naranja Colombia</h3>
+                    <p>Descubre el potencial creativo de Colombia y cómo está transformando la economía del país.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#que-es">¿Qué es?</a></li>
+                        <li><a href="#destinos">Destinos</a></li>
+                        <li><a href="#impacto">Impacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contacto</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-envelope"></i> Email: eesteban@ucundinamarca.edu.co</li>
+                        <li><i class="fas fa-phone"></i> Teléfono: +57 324 800 7048</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Dirección: Silvania, Cundinamarca, Colombia</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Economía Naranja Colombia. Todos los derechos reservados.</p>
+                <p>Elaborado por Edith Magaly Esteban Diaz</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Funcionalidad para mostrar/ocultar información al hacer clic
+        document.querySelectorAll('.destination-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Cerrar otros cards abiertos
+                document.querySelectorAll('.card-content').forEach(content => {
+                    if (content !== this.querySelector('.card-content') && content.classList.contains('active')) {
+                        content.classList.remove('active');
+                    }
+                });
+                
+                // Abrir/cerrar el card actual
+                const content = this.querySelector('.card-content');
+                content.classList.toggle('active');
+            });
+        });
+
+        // Funcionalidad para el reproductor de video
+        const video = document.getElementById('economiaVideo');
+        const playButton = document.getElementById('playButton');
+        const videoOverlay = document.querySelector('.video-overlay');
+        
+        // Reproducir/pausar video al hacer clic en el botón
+        if (playButton) {
+            playButton.addEventListener('click', function() {
+                if (video.paused) {
+                    video.play();
+                    videoOverlay.style.opacity = '0';
+                } else {
+                    video.pause();
+                    videoOverlay.style.opacity = '1';
+                }
+            });
+        }
+        
+        // Mostrar overlay cuando el video se pausa
+        if (video) {
+            video.addEventListener('pause', function() {
+                videoOverlay.style.opacity = '1';
+            });
+            
+            // Ocultar overlay cuando el video se reproduce
+            video.addEventListener('play', function() {
+                videoOverlay.style.opacity = '0';
+            });
+            
+            // Mostrar controles al pasar el mouse por encima en desktop
+            video.addEventListener('mouseover', function() {
+                video.setAttribute('controls', 'true');
+            });
+        }
+        
+        
+        // Funcionalidad básica para el formulario
+        document.querySelector('.cta-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert(`¡Gracias por suscribirte con el correo: ${email}! Te mantendremos informado sobre la economía naranja.`);
+            this.reset();
+        });
+        
+        // Smooth scrolling para los enlaces del menú
+        document.querySelectorAll('nav a, .btn').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80, // Ajuste para el header fijo
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
